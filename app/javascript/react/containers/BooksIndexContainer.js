@@ -19,7 +19,7 @@ const fetchBookData = () => {
   }, [])
 
   const bookInfo = books.map((bookData) => {
-    // debugger
+
     return(
       <BookTile
         key={bookData.isbn}
@@ -27,7 +27,7 @@ const fetchBookData = () => {
         authors={bookData.authors}
         description={bookData.description}
         isbn={bookData.isbn}
-        bookCover={bookData.image_urls}
+        bookCover={bookData.img_url}
         />
     )
   })

@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BookTile = (props) => {
-  debugger
 
   return (
     <div className="book-tile callout">
