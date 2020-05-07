@@ -2,43 +2,33 @@ class Api::V1::BooksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    title=[]
-    image_urls = []
-    authors=[]
-    description=[]
-    isbn=[]
+    books=[]
 
     base_url = "https://www.googleapis.com/books/v1/volumes"
-    num = "40"
-    query = "llama llama Red Pajama"
+    num = "5"
+    query = "android"
     response = Faraday.get("#{base_url}?&maxResults=#{num}&q=#{query}&key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
     parsed_response = JSON.parse(response.body)
 
     parsed_response["items"].each do |book|
 
-      if book["volumeInfo"]["imageLinks"].present?
-        image_urls << book["volumeInfo"]["imageLinks"]["thumbnail"]
-      end
+      book_info = {}
 
-      title << book["volumeInfo"]["title"]
-      authors << book["volumeInfo"]["authors"][0]
-      description << book["volumeInfo"]["description"]
+      book_info[:title] = book["volumeInfo"]["title"]
+      book_info[:description] = book["volumeInfo"]["description"]
+      book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"]
+      book_info[:img_urls] = book["volumeInfo"]["imageLinks"]["thumbnail"] if (book["volumeInfo"]["imageLinks"].present?)
+      # binding.pry
+      allAuthors=""
+       book["volumeInfo"]["authors"].each do |author|
+         allAuthors += " " +author
+       end
 
-      book["volumeInfo"]["industryIdentifiers"].each do |isbnID|
-        if isbnID["type"] == "ISBN_13"
-          isbn << isbnID["identifier"]
-        end
-      end
-
+      book_info[:authors] = allAuthors
+      books << book_info
     end
-
-  render json: {
-      title: title,
-      authors: authors,
-      description: description,
-      image_urls: image_urls,
-      isbn: isbn
-    }
+    # binding.pry
+  render json: books
 
   end
 end

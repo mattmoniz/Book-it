@@ -3,14 +3,13 @@ import BookTile from "../components/BookTile";
 
 const BooksIndexContainer = (props) => {
   const [books, setBooks] = useState([])
- // debugger
 const fetchBookData = () => {
   fetch("/api/v1/books")
     .then(response => response.json())
     .then(booksBody => {
-      debugger
+      // debugger
       setBooks(booksBody)
-        debugger
+        // debugger
     }
   )
 }
@@ -20,12 +19,15 @@ const fetchBookData = () => {
   }, [])
 
   const bookInfo = books.map((bookData) => {
-    debugger
+    // debugger
     return(
       <BookTile
-        key={bookData.id}
-        title={title}
-        book={bookData.image_urls}
+        key={bookData.isbn}
+        title={bookData.title}
+        authors={bookData.authors}
+        description={bookData.description}
+        isbn={bookData.isbn}
+        bookCover={bookData.image_urls}
         />
     )
   })
