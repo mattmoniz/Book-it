@@ -38,17 +38,18 @@ const BooksIndexContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
+        // debugger
         setBooks(body);
       });
   };
 
   const bookInfo = books.map(bookData => {
+    // debugger
     return (
       <BookTile
-        key={bookData.isbn}
+        key={bookData.id}
         title={bookData.title}
         authors={bookData.authors}
-        description={bookData.description}
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
       />

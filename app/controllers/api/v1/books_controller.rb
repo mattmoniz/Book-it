@@ -1,8 +1,14 @@
 class Api::V1::BooksController < ApplicationController
+  # before_action :authenticate_user!, except: [:index, :show]
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
 
+  end
+
+  def show
+    # binding.pry
+    # render json: Book.find(params[:id])
   end
 
 
