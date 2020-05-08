@@ -1,26 +1,49 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import BookTile from "../components/BookTile";
 
-const BooksIndexContainer = (props) => {
-  const [books, setBooks] = useState([])
-const fetchBookData = () => {
-  fetch("/api/v1/books")
-    .then(response => response.json())
-    .then(booksBody => {
-      // debugger
-      setBooks(booksBody)
-        // debugger
-    }
-  )
-}
+const BooksIndexContainer = props => {
+  const [books, setBooks] = useState([]);
+  const [bookSearch, setBookSearch] = useState({
+    searchString: ""
+  });
 
-  useEffect(() => {
-    fetchBookData();
-  }, [])
+  const fetchBookData = () => {
+    fetch("/api/v1/books")
+      .then(response => response.json())
+      .then(booksBody => {
+        setBook(booksBody);
+      });
+  };
 
-  const bookInfo = books.map((bookData) => {
+  const handleChange = event => {
+    setBookSearch({
+      searchString: event.currentTarget.value
+    });
+  };
 
-    return(
+  const handleSubmit = event => {
+    event.preventDefault();
+    fetch("/api/v1/books/search", {
+      method: "POST",
+      body: JSON.stringify(bookSearch),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        setBooks(body);
+      });
+  };
+
+  const bookInfo = books.map(bookData => {
+    return (
       <BookTile
         key={bookData.isbn}
         title={bookData.title}
@@ -28,23 +51,35 @@ const fetchBookData = () => {
         description={bookData.description}
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
-        />
-    )
-  })
+      />
+    );
+  });
+
   return (
-    <div className="center">
-      <form>
+    <div className="grid-container">
+
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input type="text" className="form-control mt-10" placeholder="Search for New Books"/>
+          <input
+            type="text"
+            onChange={handleChange}
+            className="form-control mt-10"
+            placeholder="Search for New Books"
+            value={bookSearch.searchString}
+            id="searchString"
+          />
         </div>
-        <button type="submit" className="btn btn-danger">Search</button>
+        <button type="submit" className="btn btn-search">
+          Search
+        </button>
       </form>
 
-      <h1>THE Best Books</h1>
-        {bookInfo}
-
+      <h1>Search for your Books</h1>
+        <div className="grid-x grid-margin-x gimme-space">
+          {bookInfo}
+        </div>
     </div>
-  )
-}
+  );
+};
 
-export default BooksIndexContainer
+export default BooksIndexContainer;
