@@ -69,15 +69,17 @@ const BooksIndexContainer = props => {
             id="searchString"
           />
         </div>
-        <button type="submit" className="btn btn-search">
+        <button className="button" type="submit" >
           Search
         </button>
       </form>
 
       <h1>Search for your Books</h1>
-        <div className="grid-x grid-margin-x gimme-space">
+      <div className="grid-x">
+        <div className="small-3 rows">
           {bookInfo}
         </div>
+      </div>
     </div>
   );
 };

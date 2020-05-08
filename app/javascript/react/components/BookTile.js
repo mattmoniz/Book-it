@@ -5,11 +5,11 @@ const BookTile = (props) => {
 
   return (
     <div className="book-tile callout">
+      <Link to="/api/v1/books/${id}">
         <img src={props.bookCover}  height="200" width="200"></img>
-        <ul>
-          <li> Title: {props.title}</li>
-          <li> Authors: {props.authors}</li>
-        </ul>
+          <p> Title: {props.title}</p>
+          <p> Authors: {props.authors}</p>
+      </Link>
   </div>
   );
 };
