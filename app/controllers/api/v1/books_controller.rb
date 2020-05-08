@@ -19,10 +19,11 @@ def search
   query = params['searchString']
   response = Faraday.get("#{base_url}?&maxResults=#{num}&q=#{query}&key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
   parsed_response = JSON.parse(response.body)
-# binding.pry
+ # binding.pry
   parsed_response["items"].each do |book|
 
     book_info = {}
+    book_info[:id] = book["id"]
     book_info[:title] = book["volumeInfo"]["title"]
     book_info[:description] = book["volumeInfo"]["description"]
     book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"] if book["volumeInfo"]["industryIdentifiers"].present?

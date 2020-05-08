@@ -6,10 +6,11 @@ const BookShowContainer = props => {
   // debugger
   const [book, setBook] = useState({});
   const [user, setUser] = useState({});
+  debugger
 
 const id = props.match.params.id;
   const fetchBookData = () => {
-    fetch(`/api/v1/books/${id}`)
+    fetch("/api/v1/books/${id}")
       .then((response) => {
         if (response.ok) {
           return response;
@@ -22,7 +23,7 @@ const id = props.match.params.id;
     };
 
       const bookShowInfo = books.map(bookData => {
-        debugger
+        // debugger
         return (
           <BookShowTile
             key={bookData.id}

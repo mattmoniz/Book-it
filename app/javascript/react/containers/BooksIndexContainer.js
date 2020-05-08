@@ -52,6 +52,7 @@ const BooksIndexContainer = props => {
         authors={bookData.authors}
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
+        description ={bookData.description}
       />
     );
   });
