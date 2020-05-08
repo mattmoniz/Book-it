@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 // import BookShowTile from "../components/BookShowTile";
 
 const BookShowContainer = props => {
-  // debugger
   const [book, setBook] = useState({});
   const [user, setUser] = useState({});
 
@@ -22,7 +21,6 @@ const id = props.match.params.id;
     };
 
       const bookShowInfo = books.map(bookData => {
-        debugger
         return (
           <BookShowTile
             key={bookData.id}

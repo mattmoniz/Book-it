@@ -38,19 +38,18 @@ const BooksIndexContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        // debugger
         setBooks(body);
       });
   };
 
   const bookInfo = books.map(bookData => {
-    // debugger
     return (
       <BookTile
         key={bookData.id}
         title={bookData.title}
         authors={bookData.authors}
         isbn={bookData.isbn}
+        description={bookData.description}
         bookCover={bookData.img_url}
       />
     );
@@ -58,7 +57,6 @@ const BooksIndexContainer = props => {
 
   return (
     <div className="grid-container">
-
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
