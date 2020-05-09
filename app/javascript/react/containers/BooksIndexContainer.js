@@ -38,20 +38,20 @@ const BooksIndexContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        // debugger
         setBooks(body);
       });
   };
 
   const bookInfo = books.map(bookData => {
-    // debugger
     return (
       <BookTile
         key={bookData.id}
+        id={bookData.id}
         title={bookData.title}
         authors={bookData.authors}
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
+        description ={bookData.description}
       />
     );
   });
