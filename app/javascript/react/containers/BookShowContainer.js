@@ -23,6 +23,7 @@ const id = props.match.params.id;
       .then((body) => {
         setBook(body);
         setUser(body.user)
+        debugger
       })
     };
 

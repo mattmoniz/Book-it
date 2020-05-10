@@ -7,13 +7,22 @@ const BooksIndexContainer = props => {
     searchString: ""
   });
 
+  const [user, setUser] = useState({
+    id: null,
+    userName: null,
+    admin: null
+  });
+
   const fetchBookData = () => {
     fetch("/api/v1/books")
       .then(response => response.json())
       .then(booksBody => {
         setBook(booksBody);
+
       });
   };
+
+
 
   const handleChange = event => {
     setBookSearch({
@@ -39,6 +48,7 @@ const BooksIndexContainer = props => {
       .then(response => response.json())
       .then(body => {
         setBooks(body);
+        setUser(user);
       });
   };
 
@@ -47,6 +57,7 @@ const BooksIndexContainer = props => {
       <BookTile
         key={bookData.id}
         id={bookData.id}
+        user={bookData.user}
         title={bookData.title}
         authors={bookData.authors}
         isbn={bookData.isbn}
@@ -58,6 +69,7 @@ const BooksIndexContainer = props => {
 
   return (
     <div className="grid-container">
+      <h5>Add Books to your Library</h5>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -75,7 +87,6 @@ const BooksIndexContainer = props => {
         </button>
       </form>
 
-      <h1>Search for your Books</h1>
       <div className="grid-x">
         <div className="small-3 rows">
           {bookInfo}
