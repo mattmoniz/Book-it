@@ -6,12 +6,12 @@ const BookShowContainer = props => {
 // debugger
 
   const [book, setBook] = useState({});
-  const [user, setUser] = useState({});
+
   // debugger
 
 
 const id = props.match.params.id;
-// debugger
+
 
   const fetchBookData = () => {
     fetch(`/api/v1/books/${id}`)
@@ -22,7 +22,7 @@ const id = props.match.params.id;
       .then((response) => response.json())
       .then((body) => {
         setBook(body);
-        setUser(body.user)
+
       })
     };
 

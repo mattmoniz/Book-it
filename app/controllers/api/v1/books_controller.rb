@@ -1,15 +1,23 @@
 class Api::V1::BooksController < ApplicationController
-  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
+    user=current_user
+    render json: {
+      user_id: user.id,
+      user_email: user.email
+    }
 
   end
 
   def show
+    # binding.pry
     base_url = "https://www.googleapis.com/books/v1/volumes"
     response = Faraday.get("#{base_url}/#{params["id"]}?key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
     parsed_response = JSON.parse(response.body)
+
+
 
      render json: { id: parsed_response["id"],
                     title: parsed_response["volumeInfo"]["title"],
@@ -36,6 +44,7 @@ def search
     book_info[:description] = book["volumeInfo"]["description"]
     book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"] if book["volumeInfo"]["industryIdentifiers"].present?
     book_info[:img_url] = book["volumeInfo"]["imageLinks"]["thumbnail"] if (book["volumeInfo"]["imageLinks"].present?)
+
 
     allAuthors=""
     if book["volumeInfo"]["authors"].present?

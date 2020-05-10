@@ -6,14 +6,21 @@ const BooksIndexContainer = props => {
   const [bookSearch, setBookSearch] = useState({
     searchString: ""
   });
+  const [user, setUser] = useState({});
 
-  const fetchBookData = () => {
+  const fetchUserData = () => {
     fetch("/api/v1/books")
       .then(response => response.json())
-      .then(booksBody => {
-        setBook(booksBody);
+      .then(userInfo => {
+        setUser(userInfo)
+        
+
       });
   };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const handleChange = event => {
     setBookSearch({
