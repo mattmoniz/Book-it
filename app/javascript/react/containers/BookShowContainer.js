@@ -18,7 +18,8 @@ const id = props.match.params.id;
       .then((response) => response.json())
       .then((body) => {
         setBook(body);
-
+        setUser(body.user)
+        debugger
       })
     };
 
