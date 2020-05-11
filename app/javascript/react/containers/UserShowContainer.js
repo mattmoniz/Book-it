@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import BookShowTile from "../components/BookShowTile";
+// import BookShowTile from "../components/UserShowTile";
 
-const BookShowContainer = props => {
+const UserShowContainer = props => {
 
-const [book, setBook] = useState({});
+const [bookLibrary, setBookLibrary] = useState({});
 const [user, setUser] = useState({
   user_id: "",
   user_email: ""
@@ -13,14 +13,13 @@ const [user, setUser] = useState({
 const id = props.match.params.id;
 
   const fetchBookData = () => {
-    fetch(`/api/v1/books/${id}`)
+    fetch(`/api/v1/user/${id}`)
       .then((response) => {
         if (response.ok) {
           return response;
         }})
       .then((response) => response.json())
       .then((body) => {
-        // debugger
         setBook(body);
         // setUser({user_id: body.user_id,
         //         user_email: body.user_email});
@@ -33,7 +32,6 @@ const id = props.match.params.id;
 
 
   const onSubmit = (event) => {
-    
     event.preventDefault();
       let payload = {
           title: book.title,
@@ -42,9 +40,9 @@ const id = props.match.params.id;
           isbn: book.isbn,
           img_url:book.img_url,
           book_id: book.id,
-          // user_id: user.user_id
+          user_id: user.user_id
       };
-      fetch(`/api/v1/books`, {
+      fetch(`/api/v1/user/${id}`, {
         credentials: "same-origin",
         method: "POST",
         body: JSON.stringify(payload),
@@ -60,13 +58,10 @@ const id = props.match.params.id;
         })
         .then((response) => response.json())
         .then((body) => {
-          // debugger
-          // setReviewRecord({
-          //   rating: "",
-          //   review: ""
-          //  })
-
-
+          setReviewRecord({
+            rating: "",
+            review: ""
+           })
         })
         .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
@@ -84,7 +79,6 @@ const id = props.match.params.id;
             description={book.description}
             isbn={book.isbn}
             bookCover={book.img_url}
-            fetchBookInfo={onSubmit}
           />
 
       </div>
@@ -92,4 +86,4 @@ const id = props.match.params.id;
   );
 };
 
-export default BookShowContainer;
+export default UserShowContainer;
