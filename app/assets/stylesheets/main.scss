@@ -3,13 +3,14 @@ body {
 }
 
 .top-bar {
-    background-color: #EE6C4D;
+    background-color: #EE6C9D;
     color: #E0FBFC;
     font-weight: bold;
     border-bottom: 5px solid #293241;
 }
+
 .top-bar-section p {
-    margin: 2px;
+    margin: 5px;
 }
 
 .top-bar a {
@@ -18,7 +19,7 @@ body {
 }
 
 .top-bar h1 {
-    font-family: 'Play', sans-serif;
+  font-family: 'Galada', cursive;
     margin-left: 20px;
 }
 
@@ -36,18 +37,18 @@ body {
   background-color: #EEEEEE;
 }
 
+.callout a {
+  font-size: 18px;
+  color: #3D5A80;
+  text-decoration: underline;
+}
+
 .center {
   text-align: center;
 }
 
 .button {
   background-color: #3D5A80;
-}
-
-.callout a {
-  font-size: 18px;
-  color: #3D5A80;
-  text-decoration: underline;
 }
 
 .no-padding {
@@ -65,8 +66,4 @@ body {
   background-color: #EE6C4D;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-}
-
-.review.callout {
-  background-color: white;
 }
