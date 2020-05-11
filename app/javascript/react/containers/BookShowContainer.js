@@ -30,9 +30,8 @@ const id = props.match.params.id;
 
   return (
     <div className="grid-container">
-      <div className="grid-x">
-
-          <BookShowTile
+      <div className="grid-x grid-margin-x">
+          <BookShowTile className="cell small-4"
             key={book.id}
             id={book.id}
             title={book.title}
@@ -41,7 +40,6 @@ const id = props.match.params.id;
             isbn={book.isbn}
             bookCover={book.img_url}
           />
-
       </div>
     </div>
   );
