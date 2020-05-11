@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import BookShowTile from "../components/BookShowTile";
 
 const BookShowContainer = props => {
-
+const [shouldRedirect, setShouldRedirect] = useState(false)
 const [book, setBook] = useState({});
 const [user, setUser] = useState({
   user_id: "",
@@ -22,8 +22,8 @@ const id = props.match.params.id;
       .then((body) => {
         // debugger
         setBook(body);
-        // setUser({user_id: body.user_id,
-        //         user_email: body.user_email});
+        setUser({user_id: body.user_id,
+                user_email: body.user_email});
       })
     };
 
@@ -33,7 +33,7 @@ const id = props.match.params.id;
 
 
   const onSubmit = (event) => {
-    
+
     event.preventDefault();
       let payload = {
           title: book.title,
@@ -60,22 +60,21 @@ const id = props.match.params.id;
         })
         .then((response) => response.json())
         .then((body) => {
-          // debugger
-          // setReviewRecord({
-          //   rating: "",
-          //   review: ""
-          //  })
-
-
+          setShouldRedirect(true)
         })
         .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
 
 
+    if (shouldRedirect) {
+        return <Redirect to={`/user/${user.user_id}`}/>
+    }
+
   return (
     <div className="grid-container">
-      <div className="grid-x grid-margin-x">
-          <BookShowTile className="cell small-4"
+      <div className="grid-x">
+
+          <BookShowTile
             key={book.id}
             id={book.id}
             title={book.title}
@@ -85,6 +84,8 @@ const id = props.match.params.id;
             bookCover={book.img_url}
             fetchBookInfo={onSubmit}
           />
+
+
       </div>
     </div>
   );

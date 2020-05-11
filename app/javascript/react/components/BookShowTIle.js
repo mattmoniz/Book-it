@@ -11,8 +11,12 @@ const BookShowTile = (props) => {
           <p> Title: {props.title}</p>
           <p> Authors: {props.authors}</p>
           <p> Description: {props.description}</p>
-          <input className="button" type="submit" value="Add to Library" onClick={props.fetchBookInfo} />
+          <div class="button-group align-center">
+            <input className="button" type="submit" value="Add to Library" onClick={props.fetchBookInfo} />
+            <Link to="/books" className="button center">Return to Search</Link>
+          </div>
     </div>
+
   );
 };
 

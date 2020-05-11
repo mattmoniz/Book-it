@@ -45,7 +45,7 @@ class Api::V1::BooksController < ApplicationController
                     user_id: user.id,
                     user_email: user.email,
 
-                    authors: parsed_response["volumeInfo"]["authors"].to_s
+                    authors: parsed_response["volumeInfo"]["authors"]
 
                     # allAuthors=""
                     # if parsed_response["volumeInfo"]["authors"].present?

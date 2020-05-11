@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BookTile = (props) => {
-  
+
   return (
     <div className="book-tile callout">
       <Link to={`/books/${props.id}`}>
@@ -10,8 +10,8 @@ const BookTile = (props) => {
           <p> Title: {props.title}</p>
           <p> Authors: {props.authors}</p>
       </Link>
-  </div>
-  );
-};
+    </div>
+    );
+  };
 
 export default BookTile;
