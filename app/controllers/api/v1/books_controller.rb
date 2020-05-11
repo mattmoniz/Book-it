@@ -61,9 +61,21 @@ def search
     books << book_info
 
   end
-render json: books
+  render json: books
 
-end
+  end
 
+
+
+  protected
+  def product_params
+    params.require(:book).permit(:title, :authors)
+  end
+
+  def authorize_user
+    if !user_signed_in? || !current_user.admin?
+      raise ActionController::RoutingError.new("Not Found")
+    end
+  end
 
 end
