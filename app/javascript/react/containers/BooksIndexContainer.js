@@ -6,14 +6,21 @@ const BooksIndexContainer = props => {
   const [bookSearch, setBookSearch] = useState({
     searchString: ""
   });
+  const [user, setUser] = useState({});
 
-  const fetchBookData = () => {
+  const fetchUserData = () => {
     fetch("/api/v1/books")
       .then(response => response.json())
-      .then(booksBody => {
-        setBook(booksBody);
+      .then(userInfo => {
+        setUser(userInfo)
+
+
       });
   };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const handleChange = event => {
     setBookSearch({
@@ -39,24 +46,28 @@ const BooksIndexContainer = props => {
       .then(response => response.json())
       .then(body => {
         setBooks(body);
+        setUser(user);
       });
   };
 
   const bookInfo = books.map(bookData => {
     return (
       <BookTile
-        key={bookData.isbn}
+        key={bookData.id}
+        id={bookData.id}
+        user={bookData.user}
         title={bookData.title}
         authors={bookData.authors}
-        description={bookData.description}
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
+        description ={bookData.description}
       />
     );
   });
 
   return (
     <div className="grid-container">
+      <h5>Add Books to your Library</h5>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -74,7 +85,6 @@ const BooksIndexContainer = props => {
         </button>
       </form>
 
-      <h1>Search for your Books</h1>
       <div className="grid-x">
         <div className="small-3 rows">
           {bookInfo}
