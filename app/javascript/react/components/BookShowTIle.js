@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const BookShowTile = (props) => {
 // debugger
   return (
-    <div className="book-tile callout">
+    <div className="book-tile">
         <img src={props.bookCover}  height="200" width="200"></img>
           <p> Title: {props.title}</p>
           <p> Authors: {props.authors}</p>
