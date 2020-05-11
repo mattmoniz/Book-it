@@ -1,6 +1,6 @@
 class LibrarySerializer < ActiveModel::Serializer
-  attributes :id, :wishlist_flag
+  # attributes :id, :wishlist_flag
 
   belongs_to :book
-  belongs_to :user 
+  belongs_to :user
 end

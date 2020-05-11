@@ -3,7 +3,44 @@ import { Link } from "react-router-dom";
 
 const BookShowTile = (props) => {
 
-  const [bookRecord, setAddbookRecord] = useState({});
+  const [bookRecord, setBookRecord] = useState({});
+
+  const handleChange = (event) => {
+  setBookRecord({
+    ...bookRecord,
+    [event.currentTarget.id]: event.currentTarget.value,
+  });
+};
+
+const onSubmit = (event) => {
+    event.preventDefault();
+
+      let formPayload = {
+        book: bookRecord,
+      };
+      fetch("/api/v1/books", {
+        credentials: "same-origin",
+        method: "POST",
+        body: JSON.stringify(formPayload),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response;
+          }
+        }
+        })
+        .then((response) => response.json())
+        .then((body) => {
+          let newBook = body.book;
+          setNewRecord(newPodcast);
+          // setShouldRedirect(true);
+        })
+  };
+
 
   return (
     <div className="book-tile callout">
