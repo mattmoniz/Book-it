@@ -13,8 +13,6 @@ const BooksIndexContainer = props => {
       .then(response => response.json())
       .then(userInfo => {
         setUser(userInfo)
-
-
       });
   };
 
