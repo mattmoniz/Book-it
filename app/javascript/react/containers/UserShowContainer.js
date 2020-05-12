@@ -78,13 +78,13 @@ const UserShowContainer = props => {
   // };
 
 
-//   return (
-//     <div className="grid-container">
-//       <div className="grid-x">
-//         {userTiles}
-//       </div>
-//     </div>
-//   );
-// };
-//
-// export default UserShowContainer;
+  return (
+    <div className="grid-container">
+      <div className="grid-x">
+
+      </div>
+    </div>
+  );
+};
+
+export default UserShowContainer;
