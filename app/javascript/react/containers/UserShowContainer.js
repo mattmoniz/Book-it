@@ -4,43 +4,43 @@ import UserTile from "../components/UserTile";
 
 const UserShowContainer = props => {
 
-const [bookLibrary, setBookLibrary] = useState({});
-const [book, setBook] = useState({});
-const [user, setUser] = useState({
-  user_id: "",
-  user_email: ""
-});
-
-
-const fetchBookData = () => {
-  fetch(`/api/v1/user/${id}`)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }})
-    .then((response) => response.json())
-    .then((body) => {
-
-      setBook(body);
-      setUser({user_id: body.user_id,
-              user_email: body.user_email});
-    })
-  };
-
-  useEffect(() => {
-    fetchBookData();
-  }, []);
-
-    UserTiles = book.map((book) => {
-      return <UserTile key={user.user_id} book={book} />
-    });
-
-
-    const rerender = (bookLibrary) => {
-      setBookLibrary(
-        [...bookLibrary, bookLibrary]
-      )
-    }
+// const [bookLibrary, setBookLibrary] = useState({});
+// const [book, setBook] = useState({});
+// const [user, setUser] = useState({
+//   user_id: "",
+//   user_email: ""
+// });
+//
+//
+// const fetchBookData = () => {
+//   fetch(`/api/v1/user/${id}`)
+//     .then((response) => {
+//       if (response.ok) {
+//         return response;
+//       }})
+//     .then((response) => response.json())
+//     .then((body) => {
+//
+//       setBook(body);
+//       setUser({user_id: body.user_id,
+//               user_email: body.user_email});
+//     })
+//   };
+//
+//   useEffect(() => {
+//     fetchBookData();
+//   }, []);
+//
+//     UserTiles = book.map((book) => {
+//       return <UserTile key={user.user_id} book={book} />
+//     });
+//
+//
+//     const rerender = (bookLibrary) => {
+//       setBookLibrary(
+//         [...bookLibrary, bookLibrary]
+//       )
+//     }
 
   // const onSubmit = (event) => {
   //   event.preventDefault();
