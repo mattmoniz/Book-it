@@ -69,7 +69,7 @@ const BooksIndexContainer = props => {
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input
+          <input autocomplete="off"
             type="text"
             onChange={handleChange}
             className="form-control mt-10"
