@@ -1,0 +1,69 @@
+body {
+  background-color: #98c1d9;
+}
+
+.top-bar {
+  background-color: #ee6c9d;
+  color: #e0fbfc;
+  font-weight: bold;
+  border-bottom: 5px solid #293241;
+}
+
+.top-bar-section p {
+  margin: 5px;
+}
+
+.top-bar a {
+  color: #293241;
+  font-weight: bolder;
+}
+
+.top-bar h1 {
+  font-family: "Galada", cursive;
+  margin-left: 20px;
+}
+
+.sticky {
+  width: 100%;
+}
+
+.content {
+  margin: 2em auto;
+  margin-top: 3em;
+}
+
+.callout {
+  border: 3px solid black;
+  background-color: #eeeeee;
+}
+
+.callout a {
+  font-size: 18px;
+  color: #3d5a80;
+  text-decoration: underline;
+}
+
+.center {
+  text-align: center;
+}
+
+.button {
+  background-color: #3d5a80;
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.callout a.button {
+  color: white;
+  text-decoration: none;
+}
+
+.delete {
+  float: right;
+  background-color: #ee6c4d;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
