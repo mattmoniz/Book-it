@@ -12,7 +12,7 @@ const BooksIndexContainer = props => {
     fetch("/api/v1/books")
       .then(response => response.json())
       .then(userInfo => {
-        setUser(userInfo)
+        setUser(userInfo);
       });
   };
 
@@ -58,7 +58,7 @@ const BooksIndexContainer = props => {
         authors={bookData.authors}
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
-        description ={bookData.description}
+        description={bookData.description}
       />
     );
   });
@@ -78,15 +78,13 @@ const BooksIndexContainer = props => {
             id="searchString"
           />
         </div>
-        <button className="button" type="submit" >
+        <button className="button" type="submit">
           Search
         </button>
       </form>
 
       <div className="grid-x">
-        <div className="small-3 rows">
-          {bookInfo}
-        </div>
+        <div className="small-3 rows">{bookInfo}</div>
       </div>
     </div>
   );

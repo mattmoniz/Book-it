@@ -1,4 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :admin
+  attributes :id, :email
+
+  has_many :libraries
 
 end
