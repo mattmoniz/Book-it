@@ -19,6 +19,7 @@ const UserShowContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
+        // debugger
         setBooks(body.user.libraries);
       });
   };
@@ -32,15 +33,20 @@ const UserShowContainer = props => {
         <UserTile
           key={book.book.id}
           id={book.book.id}
+          description={book.book.description}
+          title={book.book.title}
+          authors={book.book.authors}
           bookCover={book.book.img_url}
         />
       );
     });
   }
 
+
+
   return (
     <div className="grid-container">
-      <div className="grid-x grid-margin-x">{bookList}</div>
+      <div className="small-block-grid-3">{bookList}</div>
     </div>
   );
 };
