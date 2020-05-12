@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   has_many :libraries
-
+  has_many :books, through: :libraries
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
