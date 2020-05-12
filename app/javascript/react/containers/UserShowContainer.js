@@ -10,7 +10,7 @@ const [user, setUser] = useState({
   user_id: "",
   user_email: ""
 });
-debugger
+
 
 const fetchBookData = () => {
   fetch(`/api/v1/user/${id}`)
@@ -20,7 +20,7 @@ const fetchBookData = () => {
       }})
     .then((response) => response.json())
     .then((body) => {
-      debugger
+
       setBook(body);
       setUser({user_id: body.user_id,
               user_email: body.user_email});
@@ -31,7 +31,7 @@ const fetchBookData = () => {
     fetchBookData();
   }, []);
 
-    UserTiles = books.map((book) => {
+    UserTiles = book.map((book) => {
       return <UserTile key={user.user_id} book={book} />
     });
 
