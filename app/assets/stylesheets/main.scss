@@ -9,8 +9,8 @@ body {
   border-bottom: 5px solid #293241;
 }
 
-.top-bar-section p {
-  margin: 5px;
+ul.right {
+  background-color: #ee6c9d;
 }
 
 .top-bar a {
@@ -19,7 +19,7 @@ body {
 }
 
 .top-bar h1 {
-  font-family: "Galada", cursive;
+  font-family: "Permanent Marker", cursive;
   margin-left: 20px;
 }
 
@@ -40,7 +40,7 @@ body {
 .callout a {
   font-size: 18px;
   color: #3d5a80;
-  text-decoration: underline;
+
 }
 
 .center {
@@ -49,6 +49,8 @@ body {
 
 .button {
   background-color: #3d5a80;
+  border-radius: 10px;
+  // background-color: #F79123;
 }
 
 .no-padding {
@@ -66,4 +68,19 @@ body {
   background-color: #ee6c4d;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+p.booktile {
+  color: black;
+}
+
+.book-show-tile{
+  margin-top: 5px;
+
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }

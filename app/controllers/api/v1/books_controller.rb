@@ -13,12 +13,11 @@ class Api::V1::BooksController < ApplicationController
   def create
     # binding.pry
     book = Book.new(book_params)
+    # binding.pry
     book.save
-      # binding.pry
     if !current_user.nil?
       book.users << current_user
     end
-    # binding.pry
 
     if book.save
       render json: {book: book}
@@ -35,29 +34,20 @@ class Api::V1::BooksController < ApplicationController
     parsed_response = JSON.parse(response.body)
 
 
-
      render json: { id: parsed_response["id"],
                     title: parsed_response["volumeInfo"]["title"],
 
                     isbn: parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
                     img_url: parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
                     description: parsed_response["volumeInfo"]["description"],
+                    published_date: parsed_response["volumeInfo"]["publishedDate"],
+                    page_count: parsed_response["volumeInfo"]["pageCount"][0],
+                    book_category: parsed_response["volumeInfo"]["categories"][0],
+
                     user_id: user.id,
                     user_email: user.email,
 
-                    authors: parsed_response["volumeInfo"]["authors"]
-
-                    # allAuthors=""
-                    # if parsed_response["volumeInfo"]["authors"].present?
-                    #  parsed_response["volumeInfo"]["authors"].each.with_index do |author, index|
-                    #    if (index+1 == parsed_response["volumeInfo"]["authors"].length)
-                    #      allAuthors += author+" "
-                    #    else
-                    #      allAuthors += author+", "
-                    #    end
-                    #  end
-                    #  :authors = allAuthors
-                    # end
+                    authors: parsed_response["volumeInfo"]["authors"].join(", ")
                     }
   end
 
@@ -71,13 +61,17 @@ def search
   parsed_response = JSON.parse(response.body)
   parsed_response["items"].each do |book|
 
+
     book_info = {}
     book_info[:id] = book["id"]
     book_info[:title] = book["volumeInfo"]["title"]
     book_info[:description] = book["volumeInfo"]["description"]
-    book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"] if book["volumeInfo"]["industryIdentifiers"].present?
+    book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"] if (book["volumeInfo"]["industryIdentifiers"].present?)
     book_info[:img_url] = book["volumeInfo"]["imageLinks"]["thumbnail"] if (book["volumeInfo"]["imageLinks"].present?)
-
+    book_info[:published_date] = book["volumeInfo"]["publishedDate"] if (book["volumeInfo"]["publishedDate"].present?)
+    book_info[:page_count] = book["volumeInfo"]["pageCount"] if (book["volumeInfo"]["pageCount"].present?)
+    book_info[:book_category] = book["volumeInfo"]["categories"][0] if (book["volumeInfo"]["categories"].present?)
+# binding.pry
 
     allAuthors=""
     if book["volumeInfo"]["authors"].present?
@@ -102,7 +96,7 @@ def search
 
   protected
   def book_params
-    params.require(:book).permit(:title, :authors, :img_url ,:description ,:isbn, :user_id )
+    params.require(:book).permit(:title, :authors, :img_url ,:description ,:isbn, :user_id, :published_date, :page_count, :book_category)
   end
 
   def authorize_user
