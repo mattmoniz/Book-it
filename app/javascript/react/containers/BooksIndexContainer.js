@@ -49,6 +49,7 @@ const BooksIndexContainer = props => {
   };
 
   const bookInfo = books.map(bookData => {
+    // debugger
     return (
       <BookTile
         key={bookData.id}
@@ -59,17 +60,21 @@ const BooksIndexContainer = props => {
         isbn={bookData.isbn}
         bookCover={bookData.img_url}
         description={bookData.description}
+        publishedDate={bookData.published_date}
+        pageCount={bookData.page_count}
+        bookCategory={bookData.book_category}
+
       />
     );
   });
 
   return (
-    <div className="grid-container">
+    <div className="grid-container index">
       <h5>Add Books to your Library</h5>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input autocomplete="off"
+          <input autoComplete="off"
             type="text"
             onChange={handleChange}
             className="form-control mt-10"
@@ -84,7 +89,7 @@ const BooksIndexContainer = props => {
       </form>
 
       <div className="grid-x">
-        <div className="small-3 rows">{bookInfo}</div>
+        <div className="wrapper">{bookInfo}</div>
       </div>
     </div>
   );

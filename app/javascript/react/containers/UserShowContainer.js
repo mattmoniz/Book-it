@@ -19,7 +19,6 @@ const UserShowContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        // debugger
         setBooks(body.user.libraries);
       });
   };
@@ -37,6 +36,10 @@ const UserShowContainer = props => {
           title={book.book.title}
           authors={book.book.authors}
           bookCover={book.book.img_url}
+          isbn={book.book.isbn}
+          publishedDate={book.book.published_date}
+          pageCount={book.book.page_count}
+          bookCategory={book.book.book_category}
         />
       );
     });
@@ -46,6 +49,7 @@ const UserShowContainer = props => {
 
   return (
     <div className="grid-container">
+            <br></br>
       <div className="small-block-grid-3">{bookList}</div>
     </div>
   );

@@ -39,6 +39,9 @@ const BookShowContainer = props => {
       description: book.description,
       isbn: book.isbn,
       img_url: book.img_url,
+      published_date: book.published_date,
+      page_count: book.page_count,
+      book_category: book.book_category,
       book_id: book.id,
       user_id: user.user_id
     };
@@ -68,8 +71,9 @@ const BookShowContainer = props => {
   }
 
   return (
-    <div className="grid-container">
+    <div className="grid-container BookShow">
       <div className="grid-x">
+
         <BookShowTile
           key={book.id}
           id={book.id}
@@ -78,8 +82,12 @@ const BookShowContainer = props => {
           description={book.description}
           isbn={book.isbn}
           bookCover={book.img_url}
+          publishedDate={book.published_date}
+          pageCount={book.page_count}
+          bookCategory={book.book_category}
           fetchBookInfo={onSubmit}
         />
+
       </div>
     </div>
   );
