@@ -23,6 +23,34 @@ const UserShowContainer = props => {
       });
   };
 
+  let deleteClick = (event, book_id) => {
+    event.preventDefault();
+    book_id = event.currentTarget.id;
+    fetch(`/api/v1/books/${book_id}`, {
+      credentials: "same-origin",
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`;
+          let error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        setBooks(body.user.libraries);
+      })
+
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  };
+
   let bookList;
   if (books.length === 0) {
     bookList = <></>;
@@ -40,16 +68,15 @@ const UserShowContainer = props => {
           publishedDate={book.book.published_date}
           pageCount={book.book.page_count}
           bookCategory={book.book.book_category}
+          deleteClick={deleteClick}
         />
       );
     });
   }
 
-
-
   return (
     <div className="grid-container">
-            <br></br>
+      <br></br>
       <div className="small-block-grid-3">{bookList}</div>
     </div>
   );

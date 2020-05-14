@@ -49,7 +49,6 @@ const BooksIndexContainer = props => {
   };
 
   const bookInfo = books.map(bookData => {
-    // debugger
     return (
       <BookTile
         key={bookData.id}
@@ -63,7 +62,6 @@ const BooksIndexContainer = props => {
         publishedDate={bookData.published_date}
         pageCount={bookData.page_count}
         bookCategory={bookData.book_category}
-
       />
     );
   });
@@ -74,7 +72,8 @@ const BooksIndexContainer = props => {
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input autoComplete="off"
+          <input
+            autoComplete="off"
             type="text"
             onChange={handleChange}
             className="form-control mt-10"

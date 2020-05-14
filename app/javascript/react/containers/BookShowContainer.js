@@ -34,6 +34,7 @@ const BookShowContainer = props => {
   const onSubmit = event => {
     event.preventDefault();
     let payload = {
+      id: book.id,
       title: book.title,
       authors: book.authors,
       description: book.description,
@@ -69,11 +70,9 @@ const BookShowContainer = props => {
   if (shouldRedirect) {
     return <Redirect to={`/users/${user.user_id}`} />;
   }
-
   return (
     <div className="grid-container BookShow">
       <div className="grid-x">
-
         <BookShowTile
           key={book.id}
           id={book.id}
@@ -87,7 +86,6 @@ const BookShowContainer = props => {
           bookCategory={book.book_category}
           fetchBookInfo={onSubmit}
         />
-
       </div>
     </div>
   );
