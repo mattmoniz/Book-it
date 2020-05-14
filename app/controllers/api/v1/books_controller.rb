@@ -11,9 +11,7 @@ class Api::V1::BooksController < ApplicationController
   end
 
   def create
-    # binding.pry
     book = Book.new(book_params)
-    # binding.pry
     book.save
     if !current_user.nil?
       book.users << current_user
@@ -90,6 +88,16 @@ def search
   end
   render json: books
 
+  end
+
+
+
+
+  def destroy
+    library = Library.where(book: params[:id], user: current_user)[0]
+    Library.find(library.id).delete
+
+    render json: User.find(current_user.id)
   end
 
 
