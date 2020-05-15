@@ -69,6 +69,7 @@ const UserShowContainer = props => {
           pageCount={book.book.page_count}
           bookCategory={book.book.book_category}
           bookIdGoogleBooks={book.book.book_id_google_books}
+          nytBookReview={book.book.nyt_book_review}
           deleteClick={deleteClick}
         />
       );
@@ -76,10 +77,14 @@ const UserShowContainer = props => {
   }
 
   return (
-    <div className="grid-container">
+  <div className="grid-container index">
       <br></br>
-      <div className="small-block-grid-3">{bookList}</div>
+    <div className="grid-x">
+      <br></br>
+      <h1>Your Library</h1>
+      <div className="wrapper">{bookList}</div>
     </div>
+  </div>
   );
 };
 
