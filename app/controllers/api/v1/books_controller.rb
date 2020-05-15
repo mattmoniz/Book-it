@@ -34,7 +34,7 @@ class Api::V1::BooksController < ApplicationController
 
      render json: { id: parsed_response["id"],
                     title: parsed_response["volumeInfo"]["title"],
-
+                    book_id_google_books: parsed_response["id"],
                     isbn: parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
                     img_url: parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
                     description: parsed_response["volumeInfo"]["description"],
@@ -62,6 +62,7 @@ def search
 
     book_info = {}
     book_info[:id] = book["id"]
+    book_info[:book_id_google_books] = parsed_response["id"],
     book_info[:title] = book["volumeInfo"]["title"]
     book_info[:description] = book["volumeInfo"]["description"]
     book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"] if (book["volumeInfo"]["industryIdentifiers"].present?)
@@ -104,7 +105,7 @@ def search
 
   protected
   def book_params
-    params.require(:book).permit(:title, :authors, :img_url ,:description ,:isbn, :user_id, :published_date, :page_count, :book_category)
+    params.require(:book).permit(:title, :authors, :img_url ,:description ,:isbn, :user_id, :published_date, :page_count, :book_category, :book_id_google_books)
   end
 
   def authorize_user

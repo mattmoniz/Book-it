@@ -68,6 +68,7 @@ const UserShowContainer = props => {
           publishedDate={book.book.published_date}
           pageCount={book.book.page_count}
           bookCategory={book.book.book_category}
+          bookIdGoogleBooks={book.book.book_id_google_books}
           deleteClick={deleteClick}
         />
       );
