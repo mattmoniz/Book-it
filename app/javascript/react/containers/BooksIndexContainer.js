@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import BookTile from "../components/BookTile";
 
 const BooksIndexContainer = props => {
@@ -12,6 +13,8 @@ const BooksIndexContainer = props => {
     fetch("/api/v1/books")
       .then(response => response.json())
       .then(userInfo => {
+
+        setBooks(userInfo.user_books);
         setUser(userInfo);
       });
   };
@@ -48,7 +51,9 @@ const BooksIndexContainer = props => {
       });
   };
 
-  const bookInfo = books.map(bookData => {
+  let bookInfo
+  if (books !=null){
+   bookInfo = books.map(bookData => {
     return (
       <BookTile
         key={bookData.id}
@@ -65,9 +70,12 @@ const BooksIndexContainer = props => {
       />
     );
   });
+}
+
 
   return (
     <div className="grid-container index">
+      <br></br>
       <h5>Add Books to your Library</h5>
 
       <form onSubmit={handleSubmit}>
@@ -85,9 +93,15 @@ const BooksIndexContainer = props => {
         <button className="button" type="submit">
           Search
         </button>
+        <br></br>
+        <Link to={`/users/${user.user_id}`} className="booksindexcontainer button">
+            Go to Your Library
+          </Link>
+
       </form>
 
       <div className="grid-x">
+        <br></br>
         <div className="wrapper">{bookInfo}</div>
       </div>
     </div>

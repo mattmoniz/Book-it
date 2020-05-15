@@ -22,7 +22,6 @@ const BookShowContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        // debugger
         setBook(body);
         setUser({ user_id: body.user_id, user_email: body.user_email });
       });
@@ -45,6 +44,7 @@ const BookShowContainer = props => {
       page_count: book.page_count,
       book_category: book.book_category,
       book_id_google_books: book.book_id_google_books,
+      nyt_book_review: book.nyt_book_review,
       book_id: book.id,
       user_id: user.user_id
     };
@@ -88,6 +88,7 @@ const BookShowContainer = props => {
           pageCount={book.page_count}
           bookCategory={book.book_category}
           bookIdGoogleBooks={book.book_id_google_books}
+          nytBookReview={book.nyt_book_review}
           fetchBookInfo={onSubmit}
         />
       </div>

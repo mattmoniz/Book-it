@@ -3,11 +3,15 @@ class Api::V1::BooksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
+
     user=current_user
     render json: {
       user_id: user.id,
-      user_email: user.email
+      user_email: user.email,
+      user_books: user.books
+
     }
+
   end
 
   def create
@@ -27,27 +31,59 @@ class Api::V1::BooksController < ApplicationController
 
   def show
     user=current_user
-    base_url = "https://www.googleapis.com/books/v1/volumes"
-    response = Faraday.get("#{base_url}/#{params["id"]}?key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
-    parsed_response = JSON.parse(response.body)
 
+    google_base_url = "https://www.googleapis.com/books/v1/volumes"
+    google_response = Faraday.get("#{google_base_url}/#{params["id"]}?key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
+    google_parsed_response = JSON.parse(google_response.body)
 
-     render json: { id: parsed_response["id"],
-                    title: parsed_response["volumeInfo"]["title"],
-                    book_id_google_books: parsed_response["id"],
-                    isbn: parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
-                    img_url: parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
-                    description: parsed_response["volumeInfo"]["description"],
-                    published_date: parsed_response["volumeInfo"]["publishedDate"],
-                    page_count: parsed_response["volumeInfo"]["pageCount"][0],
-                    book_category: parsed_response["volumeInfo"]["categories"][0],
+    nyt_books_base_url = "https://api.nytimes.com/svc/books/v3/reviews.json?isbn="
+    nyt_books_isbn = google_parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"]
+    nyt_books_response = Faraday.get("#{nyt_books_base_url}#{nyt_books_isbn}&api-key=#{ENV["NY_TIMES_BOOKS_API_KEY"]}")
+    nyt_books_parsed_response = JSON.parse(nyt_books_response.body)
+
+    if (nyt_books_parsed_response["results"][0].present?)
+     render json: {
+                    id: google_parsed_response["id"],
+                    title: google_parsed_response["volumeInfo"]["title"],
+                    book_id_google_books: google_parsed_response["id"],
+                    isbn: google_parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
+                    img_url: google_parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
+                    description: google_parsed_response["volumeInfo"]["description"],
+                    published_date: google_parsed_response["volumeInfo"]["publishedDate"],
+                    page_count: google_parsed_response["volumeInfo"]["pageCount"][0],
+                    book_category: google_parsed_response["volumeInfo"]["categories"][0],
+                    authors: google_parsed_response["volumeInfo"]["authors"].join(", "),
 
                     user_id: user.id,
                     user_email: user.email,
 
-                    authors: parsed_response["volumeInfo"]["authors"].join(", ")
+                    nyt_book_review: nyt_books_parsed_response["results"][0]["url"]
+
                     }
+      else
+      render json: {
+                  id: google_parsed_response["id"],
+                  title: google_parsed_response["volumeInfo"]["title"],
+                  book_id_google_books: google_parsed_response["id"],
+                  isbn: google_parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
+                  img_url: google_parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
+                  description: google_parsed_response["volumeInfo"]["description"],
+                  published_date: google_parsed_response["volumeInfo"]["publishedDate"],
+                  page_count: google_parsed_response["volumeInfo"]["pageCount"][0],
+                  book_category: google_parsed_response["volumeInfo"]["categories"][0],
+                  authors: google_parsed_response["volumeInfo"]["authors"].join(", "),
+
+                  user_id: user.id,
+                  user_email: user.email,
+
+                  nyt_book_review: "The New York Times has not reviewed this book."
+
+                  }
+      end
+
   end
+
+
 
 
 def search
@@ -105,7 +141,7 @@ def search
 
   protected
   def book_params
-    params.require(:book).permit(:title, :authors, :img_url ,:description ,:isbn, :user_id, :published_date, :page_count, :book_category, :book_id_google_books)
+    params.require(:book).permit(:title, :authors, :img_url ,:description ,:isbn, :user_id, :published_date, :page_count, :book_category, :book_id_google_books, :nyt_book_review)
   end
 
   def authorize_user
