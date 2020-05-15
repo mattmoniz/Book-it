@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const BookShowTile = props => {
+
   return (
     <div className="book-show-tile">
       <br></br>
@@ -26,6 +27,10 @@ const BookShowTile = props => {
       <Link to="/books" className="bookshowtile button">
           Return to Search
         </Link>
+        <Link to={`/users/${props.userId}`} className="bookshowtile button">
+            Go to Your Library
+          </Link>
+
       </div>
     </div>
   );
