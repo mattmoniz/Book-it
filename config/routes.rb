@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post "/books/search", to: "books#search"
       resources :books, only: [:index, :create, :show, :destroy]
       resources :users,  only: [:show]
+
     end
   end
 end
