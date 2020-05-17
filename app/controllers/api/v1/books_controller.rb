@@ -1,5 +1,5 @@
 class Api::V1::BooksController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
