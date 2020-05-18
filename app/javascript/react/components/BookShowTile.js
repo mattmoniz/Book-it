@@ -20,21 +20,26 @@ const BookShowTile = props => {
           <p> <b>NYT Book Review:</b> {props.nytBookReview}</p>
         </div>
       </div>
-      <div className="button-group">
+
         <input
           className="bookshowtile button"
           type="submit"
           value="Add to Library"
           onClick={props.fetchBookInfo}
         />
-      <Link to="/books" className="bookshowtile button">
+      <br></br>
+      <Link to="/books"
+        className="bookshowtile button">
           Return to Search
         </Link>
-        <Link to={`/users/${props.userId}`} className="bookshowtile button">
-            Go to Your Library
-          </Link>
 
-      </div>
+        <br></br>
+
+      <Link to={`/users/${props.userId}`}
+        className="bookshowtile button">
+          Go to Your Library
+      </Link>
+
     </div>
   );
 };

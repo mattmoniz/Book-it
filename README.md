@@ -1,32 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Project Name: Book-it!
 
-Things you may want to cover:
+Description: Book it allows a user to search over 25 million books by title, authors, topic, book genres and save them to their own personal library.
 
-* Ruby version
+Authors:
+Matt Moniz
 
-* System dependencies
+Heroku link: http://mybookit.herokuapp.com/
 
-* Configuration
+Features:
+- A registered user as access to search Google books and save any books that they have read or would like to read.
 
-* Database creation
+- If the book has been reviewd by the New York Times, a link is provided on the books information page.
 
-* Database initialization
+- The user has the option to delete any book they need.
 
-* How to run the test suite
+- Book it uses Devise authentication on login.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+Technologies used in the Podcastr app:
 
-* ...
-# Book-it
-# Book-it
+- ReactJs was used on the front end.
 
-you can get a book by its volume id
+- Ruby on Rails was used for backend functionality.
 
----
-finish show page view (no crud no button) and then merge into master
-"Add to :lbrary " button (which should send a request to the API v1 bookscontroller create ) (make sure to add a new column to your books table that stores the Google Book Id (otherwise known as a volume id))
+- Postgres is used for the database.

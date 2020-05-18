@@ -51,6 +51,26 @@ const BooksIndexContainer = props => {
       });
   };
 
+
+  // let indexHeader = ""
+// debugger
+  // if(handleSubmit){
+  //   indexHeader= "Your Search Results"
+  // }else if (!bookSearch.searchString && books.length==0){
+  //   indexHeader = "Your Library is empty, let's add some books!"
+  // }else{
+  //    indexHeader = "Your Current Library"
+  //  }
+
+  let indexHeader = ""
+  if (!bookSearch.searchString && books.length==0){
+    indexHeader = "Your Library is empty, let's add some books!"
+  }else if(books.length>0){
+     indexHeader = "Your Current Library"
+  }else if(handleSubmit){
+     indexHeader = "Your Search Results"
+  }
+
   let bookInfo
   if (books !=null){
    bookInfo = books.map(bookData => {
@@ -67,6 +87,8 @@ const BooksIndexContainer = props => {
         publishedDate={bookData.published_date}
         pageCount={bookData.page_count}
         bookCategory={bookData.book_category}
+        googleBooksId={bookData.book_id_google_books}
+        bookSearchString={bookSearch}
       />
     );
   });
@@ -76,7 +98,7 @@ const BooksIndexContainer = props => {
   return (
     <div className="grid-container index">
       <br></br>
-      <h5>Add Books to your Library</h5>
+      <h5>Search for new books!</h5>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -85,7 +107,7 @@ const BooksIndexContainer = props => {
             type="text"
             onChange={handleChange}
             className="form-control mt-10"
-            placeholder="Search for New Books"
+            placeholder="Search from over 25 million books"
             value={bookSearch.searchString}
             id="searchString"
           />
@@ -100,8 +122,12 @@ const BooksIndexContainer = props => {
 
       </form>
 
+
       <div className="grid-x">
         <br></br>
+        <br></br>
+        <br></br>
+        <h3>{indexHeader}</h3>
         <div className="wrapper">{bookInfo}</div>
       </div>
     </div>
