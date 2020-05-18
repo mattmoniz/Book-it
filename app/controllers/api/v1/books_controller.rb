@@ -1,10 +1,12 @@
 class Api::V1::BooksController < ApplicationController
+  require 'sanitize'
   before_action :authenticate_user!
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
 
     user=current_user
+    # binding.pry
     render json: {
       user_id: user.id,
       user_email: user.email,
@@ -48,12 +50,11 @@ class Api::V1::BooksController < ApplicationController
                     book_id_google_books: google_parsed_response["id"],
                     isbn: google_parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
                     img_url: google_parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
-                    description: google_parsed_response["volumeInfo"]["description"],
+                    description: Sanitize.fragment(google_parsed_response["volumeInfo"]["description"], Sanitize::Config::RELAXED).gsub('<br>', ''),
                     published_date: google_parsed_response["volumeInfo"]["publishedDate"],
                     page_count: google_parsed_response["volumeInfo"]["pageCount"][0],
                     book_category: google_parsed_response["volumeInfo"]["categories"][0],
                     authors: google_parsed_response["volumeInfo"]["authors"].join(", "),
-
                     user_id: user.id,
                     user_email: user.email,
 
@@ -67,7 +68,7 @@ class Api::V1::BooksController < ApplicationController
                   book_id_google_books: google_parsed_response["id"],
                   isbn: google_parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"],
                   img_url: google_parsed_response["volumeInfo"]["imageLinks"]["thumbnail"],
-                  description: google_parsed_response["volumeInfo"]["description"],
+                  description: Sanitize.fragment(google_parsed_response["volumeInfo"]["description"], Sanitize::Config::RELAXED).gsub('<br>', ''),
                   published_date: google_parsed_response["volumeInfo"]["publishedDate"],
                   page_count: google_parsed_response["volumeInfo"]["pageCount"][0],
                   book_category: google_parsed_response["volumeInfo"]["categories"][0],
@@ -100,7 +101,7 @@ def search
     book_info[:id] = book["id"]
     book_info[:book_id_google_books] = parsed_response["id"],
     book_info[:title] = book["volumeInfo"]["title"]
-    book_info[:description] = book["volumeInfo"]["description"]
+    book_info[:description] = Sanitize.fragment(book["volumeInfo"]["description"], Sanitize::Config::RELAXED).gsub('<br>', ' '),
     book_info[:isbn] = book["volumeInfo"]["industryIdentifiers"][0]["identifier"] if (book["volumeInfo"]["industryIdentifiers"].present?)
     book_info[:img_url] = book["volumeInfo"]["imageLinks"]["thumbnail"] if (book["volumeInfo"]["imageLinks"].present?)
     book_info[:published_date] = book["volumeInfo"]["publishedDate"] if (book["volumeInfo"]["publishedDate"].present?)

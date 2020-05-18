@@ -72,6 +72,8 @@ const BookShowContainer = props => {
   if (shouldRedirect) {
     return <Redirect to={`/users/${user.user_id}`} />;
   }
+
+
   return (
     <div className="grid-container BookShow">
       <div className="grid-x">

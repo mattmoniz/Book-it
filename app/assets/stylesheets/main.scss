@@ -4,7 +4,7 @@ body {
 
 .top-bar {
   background-color: #D2543B;
-  color: #e0fbfc;
+  color: #03045e;
   font-weight: bold;
   border-bottom: 3px solid #293241;
 }
@@ -15,7 +15,7 @@ ul.right {
 
 .top-bar a {
   background-color: #D2543B;
-  color: #293241;
+  color: #1d3557;
   font-weight: bolder;
   font-family: "Permanent Marker", cursive;
   margin-left: 20px;
@@ -32,7 +32,7 @@ ul.right {
 
 .callout {
   border: 3px solid black;
-  background-color: #fac27d;
+  background-color: #e9c46a;
 
 }
 
@@ -47,7 +47,7 @@ ul.right {
 }
 
 .button {
-  background-color: #6E876A;
+  background-color: #1d3557;
   border-radius: 10px;
   font-family: "Permanent Marker", cursive;
   // background-color: #F79123;
@@ -56,7 +56,6 @@ ul.right {
     font-weight: bold;
     background-color: #ee6c4d;
   }
-
 
 .no-padding {
   padding-left: 0;
@@ -91,14 +90,86 @@ p.booktile {
   grid-gap: 10px;
 }
 
-/* HEX */
-$color1: #DE5D40ff;
-$color2: #B8C588ff;
-$color3: #3E6A65ff;
-$color4: #B37F6Cff;
-$color5: #DA9286ff;
-$color6: #957377ff;
-$color7: #F8F2D9ff;
-$color8: #291920ff;
-$color9: #6E876Aff;
-$color10: #FAC27Dff;
+.callout.user-signin{
+  top: 30%;
+  border-radius: 20px;
+  max-width: 60%;
+  float: none;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 80px;
+  border-radius: 20px;
+  font-family: "Permanent Marker";
+  color: #1d3557;
+}
+.user-signin.label{
+  font-size: 25px;
+}
+
+.actions{
+  font-size: 25px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  border: 3px solid green;
+}
+
+.callout.user-signup{
+  top: 30%;
+  border-radius: 20px;
+  max-width: 60%;
+  float: none;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 80px;
+  border-radius: 20px;
+  color: #1d3557;
+  font-size: large;
+  font-family: "Permanent Marker";
+  color: #1d3557;
+}
+.user-signup.label{
+  font-size: 25px;
+}
+
+h5 {
+  font-family: "Permanent Marker";
+  color: #1d3557;
+}
+
+h3 {
+  font-family: "Permanent Marker";
+  color: #1d3557;
+  border-radius: 20px;
+  float: none;
+  margin: auto;
+}
+
+h2 {
+  font-family: "Permanent Marker";
+  color: #1d3557;
+}
+
+h1 {
+  font-family: "Permanent Marker";
+  color: #1d3557;
+}
+
+b {
+  font-family: "Permanent Marker"
+}
+
+.callout img {
+  border: 2px solid black;
+}
+
+.book-show-tile img{
+  border: 2px solid black;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
