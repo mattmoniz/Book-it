@@ -1,5 +1,7 @@
 body {
-  background-color: #94CEAD;
+
+  background:image-url('stackofbooks-green.png') no-repeat right fixed;
+    background-color: #94CEAD;
 }
 
 .top-bar {
@@ -168,6 +170,20 @@ b {
 }
 
 .book-show-tile img{
+  border: 2px solid black;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.book-tile img{
+  border: 2px solid black;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-tile img{
   border: 2px solid black;
   display: block;
   margin-left: auto;
