@@ -143,6 +143,14 @@ h5 {
   color: #1d3557;
 }
 
+h4 {
+  font-family: "Permanent Marker";
+  color: #1d3557;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 h3 {
   font-family: "Permanent Marker";
   color: #1d3557;
@@ -178,6 +186,12 @@ b {
 
 .book-tile img{
   border: 2px solid black;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.book-show-tile iframe{
   display: block;
   margin-left: auto;
   margin-right: auto;

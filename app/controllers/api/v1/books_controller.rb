@@ -45,9 +45,7 @@ class Api::V1::BooksController < ApplicationController
     goodreads_base_url = "https://www.goodreads.com/book/isbn/"
     goodreads_response = Faraday.get("#{goodreads_base_url}#{goodreads_isbn}?format=json&user_id=114918137")
     goodreads_parsed_response = JSON.parse(goodreads_response.body)
-    # binding.pry
-    # goodreads_iframe= "https://www.goodreads.com/api/reviews_widget_iframe?amp;format=html&amp;isbn=#{goodreads_isbn}&amp;links=660&amp;review_back=fff&amp;stars=000&amp;text=000"
-    goodreads_iframe_src="https://www.goodreads.com/book/isbn/#{goodreads_isbn}?format=json&user_id=114918137"
+    goodreads_iframe_src="https://www.goodreads.com/api/reviews_widget_iframe?did=DEVELOPER_ID&amp;format=html&amp;isbn=#{goodreads_isbn}&amp;links=660&amp;review_back=fff&amp;stars=000&amp;text=000"
     if (nyt_books_parsed_response["results"][0].present?)
      render json: {
                     id: google_parsed_response["id"],
