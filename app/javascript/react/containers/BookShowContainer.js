@@ -4,6 +4,7 @@ import BookShowTile from "../components/BookShowTile";
 import UserShowContainer from "./UserShowContainer";
 
 const BookShowContainer = props => {
+
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [book, setBook] = useState({});
   const [user, setUser] = useState({
@@ -46,7 +47,10 @@ const BookShowContainer = props => {
       book_id_google_books: book.book_id_google_books,
       nyt_book_review: book.nyt_book_review,
       book_id: book.id,
-      user_id: user.user_id
+      user_id: user.user_id,
+      goodReadsReviews: book.goodreads_reviews,
+      goodreads_iframe_src: book.goodreads_iframe_src
+
     };
     fetch(`/api/v1/books`, {
       credentials: "same-origin",
@@ -92,6 +96,8 @@ const BookShowContainer = props => {
           bookIdGoogleBooks={book.book_id_google_books}
           nytBookReview={book.nyt_book_review}
           fetchBookInfo={onSubmit}
+          goodReadsReviews={book.goodreads_reviews}
+          goodReadsIframeSrc={book.goodreads_iframe_src}
         />
       </div>
     </div>

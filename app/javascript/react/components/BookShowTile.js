@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const BookShowTile = props => {
-
+      // debugger
+      let good_reads_src = `https://www.goodreads.com/api/reviews_widget_iframe?did=DEVELOPER_ID&amp;format=html&amp;isbn=${props.isbn}&amp;links=660&amp;review_back=fff&amp;stars=000&amp;text=000`
+      debugger
   return (
     <div className="book-show-tile">
       <br></br>
@@ -39,6 +41,16 @@ const BookShowTile = props => {
         className="bookshowtile button">
           Go to Your Library
       </Link>
+
+      <html>
+      <iframe
+        id="the_iframe"
+        src={good_reads_src}
+        width="565"
+        height="400"
+        frameborder="0">
+      </iframe>
+      </html>
 
     </div>
   );
