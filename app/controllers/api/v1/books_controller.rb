@@ -1,6 +1,6 @@
 class Api::V1::BooksController < ApplicationController
   require 'sanitize'
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   protect_from_forgery unless: -> { request.format.json? }
 
   def index

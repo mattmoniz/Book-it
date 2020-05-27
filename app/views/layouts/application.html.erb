@@ -16,7 +16,7 @@
     <section class="top-bar-section">
       <ul class="right">
         <%- if current_user -%>
-          <p><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></p>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
         <%- else -%>
           <p><%= link_to 'Sign Up', new_user_registration_path %></p>
           <p><%= link_to 'Sign In', new_user_session_path %></p>
@@ -25,13 +25,13 @@
     </section>
   </nav>
 
-<div id="flash-messages">
+
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">
       <%= value %>
     </div>
   <%- end -%>
-</div>
+
   <%= yield %>
 
   <%= javascript_include_tag 'application' %>
