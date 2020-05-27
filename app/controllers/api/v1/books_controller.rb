@@ -4,13 +4,17 @@ class Api::V1::BooksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-
     user=current_user
+    
+    if user_signed_in?
     render json: {
       user_id: user.id,
       user_email: user.email,
       user_books: user.books
     }
+    else
+    flash[:alert] = "Please login before proceeding."
+    end
 
   end
 
@@ -154,6 +158,7 @@ def search
 
   def authorize_user
     if !user_signed_in?
+      binding.pry
       raise ActionController::RoutingError.new("Not Found")
     end
   end
