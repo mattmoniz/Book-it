@@ -13,7 +13,6 @@ const BooksIndexContainer = props => {
     fetch("/api/v1/books")
       .then(response => response.json())
       .then(userInfo => {
-
         setBooks(userInfo.user_books);
         setUser(userInfo);
       });
@@ -48,8 +47,11 @@ const BooksIndexContainer = props => {
       .then(body => {
         setBooks(body);
         setUser(user);
-      });
+
+      })
+      .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
+
 
   let indexHeader = ""
   if (!bookSearch.searchString && books.length==0){

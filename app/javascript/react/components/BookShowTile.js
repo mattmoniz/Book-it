@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 const BookShowTile = props => {
 
+  let BookReviewHeading = `Book Reviews for ${props.title} courtesy of GoodReads.`
+
   return (
     <div className="book-show-tile">
       <br></br>
@@ -21,13 +23,27 @@ const BookShowTile = props => {
         </div>
       </div>
 
+      <div>
+        <h4> {BookReviewHeading} </h4>
+        <iframe
+          id="the_iframe"
+          src={props.goodReadsIframeSrc}
+          width="1200"
+          height="400"
+          frameBorder="0">
+        </iframe>
+      </div>
+      <br></br>
+
         <input
           className="bookshowtile button"
           type="submit"
           value="Add to Library"
           onClick={props.fetchBookInfo}
         />
+
       <br></br>
+
       <Link to="/books"
         className="bookshowtile button">
           Return to Search

@@ -19,9 +19,9 @@ $(function(){ $(document).foundation(); });
 
 $(function(){
    var flashDurationInSeconds = 5;
-   var flashContainerId = 'flash-messages';
+   var flashContainerId = 'flash';
    function removeFlashMessages() {
-     $('#' + flashContainerId).remove();
+     $('.' + flashContainerId).remove();
    }
    setTimeout(removeFlashMessages, flashDurationInSeconds * 1000);
 });

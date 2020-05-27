@@ -1,18 +1,20 @@
 class Api::V1::BooksController < ApplicationController
   require 'sanitize'
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-
     user=current_user
-    # binding.pry
+    
+    if user_signed_in?
     render json: {
       user_id: user.id,
       user_email: user.email,
       user_books: user.books
-
     }
+    else
+    flash[:alert] = "Please login before proceeding."
+    end
 
   end
 
@@ -43,6 +45,11 @@ class Api::V1::BooksController < ApplicationController
     nyt_books_response = Faraday.get("#{nyt_books_base_url}#{nyt_books_isbn}&api-key=#{ENV["NY_TIMES_BOOKS_API_KEY"]}")
     nyt_books_parsed_response = JSON.parse(nyt_books_response.body)
 
+    goodreads_isbn = google_parsed_response["volumeInfo"]["industryIdentifiers"][0]["identifier"]
+    goodreads_base_url = "https://www.goodreads.com/book/isbn/"
+    goodreads_response = Faraday.get("#{goodreads_base_url}#{goodreads_isbn}?format=json&user_id=114918137")
+    goodreads_parsed_response = JSON.parse(goodreads_response.body)
+    goodreads_iframe_src="https://www.goodreads.com/api/reviews_widget_iframe?did=DEVELOPER_ID&amp;format=html&amp;isbn=#{goodreads_isbn}&amp;links=660&amp;review_back=fff&amp;stars=000&amp;text=000"
     if (nyt_books_parsed_response["results"][0].present?)
      render json: {
                     id: google_parsed_response["id"],
@@ -58,7 +65,10 @@ class Api::V1::BooksController < ApplicationController
                     user_id: user.id,
                     user_email: user.email,
 
-                    nyt_book_review: nyt_books_parsed_response["results"][0]["url"]
+                    nyt_book_review: nyt_books_parsed_response["results"][0]["url"],
+
+                    goodreads_reviews: goodreads_parsed_response["reviews_widget"],
+                    goodreads_iframe_src: goodreads_iframe_src
 
                     }
       else
@@ -77,9 +87,10 @@ class Api::V1::BooksController < ApplicationController
                   user_id: user.id,
                   user_email: user.email,
 
-                  nyt_book_review: "The New York Times has not reviewed this book."
-
-                  }
+                  nyt_book_review: "The New York Times has not reviewed this book.",
+                  goodreads_reviews: goodreads_parsed_response["reviews_widget"],
+                  goodreads_iframe_src: goodreads_iframe_src
+                }
       end
 
   end
@@ -147,6 +158,7 @@ def search
 
   def authorize_user
     if !user_signed_in?
+      binding.pry
       raise ActionController::RoutingError.new("Not Found")
     end
   end
