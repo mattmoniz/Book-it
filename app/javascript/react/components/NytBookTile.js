@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NytBookTile = props => {
+  debugger
 
-  let renderUserLibraryonIndex=""
-  if (!props.bookSearchString.searchString){
-    renderUserLibraryonIndex= `/books/${props.googleBooksId}`
-  }else{
-    renderUserLibraryonIndex= `/books/${props.id}`
-  }
+  // let renderUserLibraryonIndex=""
+  // if (!props.bookSearchString.searchString){
+  //   renderUserLibraryonIndex= `/books/${props.googleBooksId}`
+  // }else{
+  //   renderUserLibraryonIndex= `/books/${props.id}`
+  // }
   return (
     <div className="callout book-tile">
       <Link to={renderUserLibraryonIndex}>

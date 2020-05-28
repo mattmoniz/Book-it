@@ -4,6 +4,7 @@ import BookShowTile from "../components/BookShowTile";
 import UserShowContainer from "./UserShowContainer";
 
 const BookShowContainer = props => {
+  debugger
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [book, setBook] = useState({});

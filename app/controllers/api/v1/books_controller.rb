@@ -5,7 +5,7 @@ class Api::V1::BooksController < ApplicationController
 
   def index
     user=current_user
-    
+
     if user_signed_in?
     render json: {
       user_id: user.id,
@@ -105,9 +105,8 @@ def search
   query = params['searchString']
   response = Faraday.get("#{base_url}?&maxResults=#{num}&q=#{query}&key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
   parsed_response = JSON.parse(response.body)
+
   parsed_response["items"].each do |book|
-
-
     book_info = {}
     book_info[:id] = book["id"]
     book_info[:book_id_google_books] = parsed_response["id"],
@@ -118,7 +117,6 @@ def search
     book_info[:published_date] = book["volumeInfo"]["publishedDate"] if (book["volumeInfo"]["publishedDate"].present?)
     book_info[:page_count] = book["volumeInfo"]["pageCount"] if (book["volumeInfo"]["pageCount"].present?)
     book_info[:book_category] = book["volumeInfo"]["categories"][0] if (book["volumeInfo"]["categories"].present?)
-# binding.pry
 
     allAuthors=""
     if book["volumeInfo"]["authors"].present?
@@ -135,6 +133,7 @@ def search
     books << book_info
 
   end
+  binding.pry
   render json: books
 
   end

@@ -14,7 +14,7 @@ export const App = props => {
         <Route exact path="/books" component={BooksIndexContainer} />
         <Route exact path="/books/:id" component={BookShowContainer} />
         <Route exact path="/users/:id" component={UserShowContainer} />
-        <Route exact path="/NytBooksList" component={NytBooksListContainer} />
+        <Route exact path="/nytbookslists" component={NytBooksListContainer} />
 
       </Switch>
     </BrowserRouter>
