@@ -28,35 +28,30 @@ const NytBooksListContainer = props => {
     fetchBookLists();
   }, []);
 
-  const handleChange = event => {
-    let selectedValue = event.target.value;
-    this.props.onSelectChange(selectedValue);
-  };
 
 
   let booklistInfo
   if (bookLists !=null){
-   booklistInfo = bookLists.map(listData => {
+   booklistInfo = bookLists.map((listData,i) => {
     return (
-      <NytBookTile
-        key={listData.id}
-        id={listData.id}
-        listName={listData.list_name}
-        displayName={listData.display_name}
-        oldestPublishedDate={listData.oldest_published_date}
-        newestPublishedDate={listData.newest_published_date}
+      <option
+        key={i}
+        listname={listData.list_name}
+        displayname={listData.display_name}
+        oldestpublisheddate={listData.oldest_published_date}
+        newestpublisheddate={listData.newest_published_date}
         updated={listData.updated}
-      />
-    );
+        value={listData.display_name}
+      >{listData.list_name}</option>
+    )
   });
 }
 
   return (
     <div className="grid-container index">
       <br></br>
-      <h5>New York Times Best Seller List!</h5>
-        <select id="list" value={bookLists.displayName} onChange={handleChange}>
-        </select>
+      <h5>New York Times Best Seller Lists!</h5>
+        <select>{booklistInfo}</select>
     </div>
   );
 };
