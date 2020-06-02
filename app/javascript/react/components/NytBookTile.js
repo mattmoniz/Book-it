@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NytBookTile = props => {
-  debugger
+
 
   // let renderUserLibraryonIndex=""
   // if (!props.bookSearchString.searchString){
@@ -12,16 +12,16 @@ const NytBookTile = props => {
   // }
   return (
     <div className="callout book-tile">
-      <Link to={renderUserLibraryonIndex}>
         <img className=" book-tile-image" src={props.bookCover} height="300" width="300"></img>
         <br></br>
         <br></br>
         <p className="booktile" > <b>Title: </b>{props.title}</p>
-        <p className="booktile"> <b>Authors: </b>{props.authors}</p>
-        <p className="booktile"> <b>Published Date: </b> {props.publishedDate}</p>
+        <p className="booktile"> <b>Authors: </b>{props.author}</p>
+        <p className="booktile"> <b>List Rank: </b> {props.rank}</p>
+        <p className="booktile"> <b>Previous Week Rank: </b> {props.previousRank}</p>
+        <p className="booktile"> <b>Weeks on List: </b> {props.weeksOnList}</p>
         <br></br>
         <br></br>
-      </Link>
     </div>
   );
 };

@@ -80,22 +80,21 @@ const NytBooksListContainer = props => {
   }
 
   let bestSellers;
-  if (bookLists != null) {
+  if (bestSellerList != null) {
     bestSellers = bestSellerList.map((listData, i) => {
+
       return (
-        <option
+        <NytBookTile
           key={i}
-          listname={listData.list_name}
-          displayname={listData.display_name}
-          oldestpublisheddate={listData.oldest_published_date}
-          newestpublisheddate={listData.newest_published_date}
-          updated={listData.updated}
-          listnameencoded={listData.list_name_encoded}
-          value={bookListSelect.list_name_encoded}
-          id="selectedString"
-        >
-          {listData.list_name}
-        </option>
+          title={listData.title}
+          author={listData.author}
+          bookCover={listData.book_image}
+          isbn={listData.isbn}
+          rank={listData.rank}
+          previousRank={listData.rank_last_week}
+          weeksOnList={listData.weeks_on_list}
+          description={listData.description}
+        />
       );
     });
   }
@@ -111,6 +110,8 @@ const NytBooksListContainer = props => {
         </button>
         <br></br>
       </form>
+
+      <div>{bestSellers}</div>
     </div>
   );
 };

@@ -133,7 +133,6 @@ def search
     books << book_info
 
   end
-  binding.pry
   render json: books
 
   end
@@ -157,7 +156,6 @@ def search
 
   def authorize_user
     if !user_signed_in?
-      binding.pry
       raise ActionController::RoutingError.new("Not Found")
     end
   end
