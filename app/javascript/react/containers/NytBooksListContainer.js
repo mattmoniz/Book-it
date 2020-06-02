@@ -100,7 +100,7 @@ const NytBooksListContainer = props => {
   }
 
   return (
-    <div className="grid-container index">
+    <div>
       <br></br>
       <h5>New York Times Best Seller Lists!</h5>
       <form className="nytimes-listform" onSubmit={handleSubmit}>
