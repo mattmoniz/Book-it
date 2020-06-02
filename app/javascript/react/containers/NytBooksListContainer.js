@@ -7,6 +7,7 @@ const NytBooksListContainer = props => {
   const [bookListSelect, setBookListSelect] = useState({
     selectedString: ""
   });
+  const [bestSellerList, setbestSellerList] = useState([]);
 
   const fetchBookLists = () => {
     fetch("/api/v1/nytbookslists")
@@ -30,14 +31,12 @@ const NytBooksListContainer = props => {
   }, []);
 
   const handleChange = event => {
-        debugger
-    setBookSearch({
-      selectedString: event.currentTarget.value
+    setBookListSelect({
+      selectedString: event.currentTarget.selectedOptions[0].getAttribute("listnameencoded"),
     });
   };
 
   const handleSubmit = event => {
-    debugger
     event.preventDefault();
     fetch("/api/v1/nytbookslists/selectlist", {
       method: "POST",
@@ -54,14 +53,14 @@ const NytBooksListContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        setBookListSelect(body);
+        setbestSellerList(body);
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   };
 
-  let booklistInfo;
+  let bookgenreInfo;
   if (bookLists != null) {
-    booklistInfo = bookLists.map((listData, i) => {
+    bookgenreInfo = bookLists.map((listData, i) => {
       return (
         <option
           key={i}
@@ -70,7 +69,29 @@ const NytBooksListContainer = props => {
           oldestpublisheddate={listData.oldest_published_date}
           newestpublisheddate={listData.newest_published_date}
           updated={listData.updated}
-          value={bookListSelect.display_name}
+          listnameencoded={listData.list_name_encoded}
+          value={bookListSelect.list_name_encoded}
+          id="selectedString"
+        >
+          {listData.list_name}
+        </option>
+      );
+    });
+  }
+
+  let bestSellers;
+  if (bookLists != null) {
+    bestSellers = bestSellerList.map((listData, i) => {
+      return (
+        <option
+          key={i}
+          listname={listData.list_name}
+          displayname={listData.display_name}
+          oldestpublisheddate={listData.oldest_published_date}
+          newestpublisheddate={listData.newest_published_date}
+          updated={listData.updated}
+          listnameencoded={listData.list_name_encoded}
+          value={bookListSelect.list_name_encoded}
           id="selectedString"
         >
           {listData.list_name}
@@ -84,7 +105,7 @@ const NytBooksListContainer = props => {
       <br></br>
       <h5>New York Times Best Seller Lists!</h5>
       <form className="nytimes-listform" onSubmit={handleSubmit}>
-        <select>{booklistInfo}</select>
+        <select onChange={handleChange}>{bookgenreInfo}</select>
         <button className="button" type="submit">
           Get the NY Times BookList
         </button>
