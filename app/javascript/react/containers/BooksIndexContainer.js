@@ -47,44 +47,41 @@ const BooksIndexContainer = props => {
       .then(body => {
         setBooks(body);
         setUser(user);
-
       })
-      .catch((error) => console.error(`Error in fetch: ${error.message}`));
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   };
 
-
-  let indexHeader = ""
-  if (!bookSearch.searchString && books.length==0){
-    indexHeader = "Your Library is empty, let's add some books!"
-  }else if(books.length>0){
-     indexHeader = "Your Current Library"
-  }else if(handleSubmit){
-     indexHeader = "Your Search Results"
+  let indexHeader = "";
+  if (!bookSearch.searchString && books.length == 0) {
+    indexHeader = "Your Library is empty, let's add some books!";
+  } else if (books.length > 0) {
+    indexHeader = "Your Current Library";
+  } else if (handleSubmit) {
+    indexHeader = "Your Search Results";
   }
 
-  let bookInfo
-  if (books !=null){
-   bookInfo = books.map(bookData => {
-    return (
-      <BookTile
-        key={bookData.id}
-        id={bookData.id}
-        user={bookData.user}
-        title={bookData.title}
-        authors={bookData.authors}
-        isbn={bookData.isbn}
-        bookCover={bookData.img_url}
-        description={bookData.description}
-        publishedDate={bookData.published_date}
-        pageCount={bookData.page_count}
-        bookCategory={bookData.book_category}
-        googleBooksId={bookData.book_id_google_books}
-        bookSearchString={bookSearch}
-      />
-    );
-  });
-}
-
+  let bookInfo;
+  if (books != null) {
+    bookInfo = books.map(bookData => {
+      return (
+        <BookTile
+          key={bookData.id}
+          id={bookData.id}
+          user={bookData.user}
+          title={bookData.title}
+          authors={bookData.authors}
+          isbn={bookData.isbn}
+          bookCover={bookData.img_url}
+          description={bookData.description}
+          publishedDate={bookData.published_date}
+          pageCount={bookData.page_count}
+          bookCategory={bookData.book_category}
+          googleBooksId={bookData.book_id_google_books}
+          bookSearchString={bookSearch}
+        />
+      );
+    });
+  }
 
   return (
     <div className="grid-container index">
@@ -107,12 +104,13 @@ const BooksIndexContainer = props => {
           Search
         </button>
         <br></br>
-        <Link to={`/users/${user.user_id}`} className="booksindexcontainer button">
-            Go to Your Library
-          </Link>
-
+        <Link
+          to={`/users/${user.user_id}`}
+          className="booksindexcontainer button"
+        >
+          Go to Your Library
+        </Link>
       </form>
-
 
       <div className="grid-x">
         <br></br>
