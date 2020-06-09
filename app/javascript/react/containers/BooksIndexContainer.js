@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BookTile from "../components/BookTile";
+import NytBooksListContainer from "./NytBooksListContainer";
 
 const BooksIndexContainer = props => {
   const [books, setBooks] = useState([]);
@@ -110,6 +111,15 @@ const BooksIndexContainer = props => {
         >
           Go to Your Library
         </Link>
+        <br></br>
+
+          <Link
+            to={`/nytbookslists`}
+            className="booksindexcontainer button"
+          >
+            Get the New York Times Book List
+          </Link>
+
       </form>
 
       <div className="grid-x">

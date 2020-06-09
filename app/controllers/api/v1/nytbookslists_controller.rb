@@ -23,6 +23,14 @@ class Api::V1::NytbookslistsController < ApplicationController
 
 
     def selectlist
+      user=current_user
+
+      google_base_url = "https://www.googleapis.com/books/v1/volumes"
+      google_response = Faraday.get("#{google_base_url}/#{params["id"]}?key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
+      google_parsed_response = JSON.parse(google_response.body)
+      binding.pry
+
+
       nyt_books_list_selected_url = "https://api.nytimes.com/svc/books/v3/lists/current/"
       list_query = params['selectedString']
       nyt_books_list_selected_response = Faraday.get("#{nyt_books_list_selected_url}#{list_query}.json?api-key=#{ENV["NY_TIMES_BOOKS_API_KEY"]}")
