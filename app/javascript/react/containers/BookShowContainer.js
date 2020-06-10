@@ -4,7 +4,6 @@ import BookShowTile from "../components/BookShowTile";
 import UserShowContainer from "./UserShowContainer";
 
 const BookShowContainer = props => {
-
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [book, setBook] = useState({});
   const [user, setUser] = useState({
@@ -12,8 +11,7 @@ const BookShowContainer = props => {
     user_email: ""
   });
 
-  const id = props.match.params.id;
-
+const id = props.match.params.id;
   const fetchBookData = () => {
     fetch(`/api/v1/books/${id}`)
       .then(response => {
@@ -50,7 +48,6 @@ const BookShowContainer = props => {
       user_id: user.user_id,
       goodReadsReviews: book.goodreads_reviews,
       goodreads_iframe_src: book.goodreads_iframe_src
-
     };
     fetch(`/api/v1/books`, {
       credentials: "same-origin",
@@ -76,7 +73,6 @@ const BookShowContainer = props => {
   if (shouldRedirect) {
     return <Redirect to={`/users/${user.user_id}`} />;
   }
-
 
   return (
     <div className="grid-container BookShow">
