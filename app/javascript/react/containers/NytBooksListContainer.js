@@ -100,16 +100,23 @@ const NytBooksListContainer = props => {
   }
 
   return (
-    <div>
+    <div className = "nyTimesList-list">
       <br></br>
       <h5>New York Times Best Seller Lists!</h5>
-      <form className="nytimes-listform" onSubmit={handleSubmit}>
+      <form className="nytimes-dropdown" onSubmit={handleSubmit}>
         <select onChange={handleChange}>{bookgenreInfo}</select>
         <button className="button" type="submit">
           Get the NY Times BookList
         </button>
         <br></br>
       </form>
+
+      <Link
+        to={`/`}
+        className="booksindexcontainer button"
+      >
+        Return to Search
+      </Link>
 
       <div>{bestSellers}</div>
     </div>
