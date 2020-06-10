@@ -79,11 +79,18 @@ const UserShowContainer = props => {
   return (
   <div className="grid-container index">
       <br></br>
+
     <div className="grid-x">
       <br></br>
       <h1>Your Library</h1>
       <div className="wrapper">{bookList}</div>
     </div>
+    <Link
+      to={`/`}
+      className="booksindexcontainer button"
+    >
+      Search for a new Book
+    </Link>
   </div>
   );
 };

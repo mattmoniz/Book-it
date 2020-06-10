@@ -96,7 +96,7 @@ const BooksIndexContainer = props => {
             type="text"
             onChange={handleChange}
             className="form-control mt-10"
-            placeholder="Search from over 25 million books"
+            placeholder="Search by Title, Author, or Genre"
             value={bookSearch.searchString}
             id="searchString"
           />
