@@ -37,7 +37,6 @@ class Api::V1::BooksController < ApplicationController
     user=current_user
 
     google_base_url = "https://www.googleapis.com/books/v1/volumes"
-
     google_response = Faraday.get("#{google_base_url}/#{params["id"]}?key=#{ENV["GOOGLE_BOOKS_API_KEY"]}")
     google_parsed_response = JSON.parse(google_response.body)
 
