@@ -22,3 +22,18 @@ Technologies used in the Podcastr app:
 - ReactJs
 - Ruby on Rails
 - Postgres SQL
+
+<img width="1278" alt="Screenshot 2020-06-15 15 35 43" src="https://user-images.githubusercontent.com/4000619/84701952-dfb33000-af23-11ea-9149-4e18e2f569dc.png">
+
+<img width="1280" alt="Screenshot 2020-06-15 16 18 12" src="https://user-images.githubusercontent.com/4000619/84701973-e9d52e80-af23-11ea-93f4-ce217657153f.png">
+
+<img width="809" alt="Screenshot 2020-06-15 16 19 49" src="https://user-images.githubusercontent.com/4000619/84702088-18530980-af24-11ea-8516-0577c8293678.png">
+
+<img width="817" alt="Screenshot 2020-06-15 16 20 04" src="https://user-images.githubusercontent.com/4000619/84702173-34ef4180-af24-11ea-88fc-19cfcd61a7bf.png">
+
+<img width="1280" alt="Screenshot 2020-06-15 16 10 18" src="https://user-images.githubusercontent.com/4000619/84702222-433d5d80-af24-11ea-87c5-2330d1e244ed.png">
+
+<img width="1270" alt="Screenshot 2020-06-15 16 16 25" src="https://user-images.githubusercontent.com/4000619/84702330-6962fd80-af24-11ea-9881-03d984304e76.png">
+
+
+
